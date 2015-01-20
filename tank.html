@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+	<head>
+    		<script src="phaser.min.js"></script>
+    		<style>
+    			body{margin:0}
+    		</style>
+    		<script type="text/javascript">
+			window.onload = function() {
+				// here we define a new 640x480 game, with three core functions:
+				// onPreload to be executed when the game preloads
+				// onCreate to be executed once the game is firstly created
+				// onUpdate to be called every time the game us updated
+				var text;
+				var game = new Phaser.Game(640,480,Phaser.AUTO,"",{preload:onPreload, create:onCreate, update:onUpdate});
+
+				
+				// THE GAME IS PRELOADING
+				function onPreload() {
+					game.load.image('logo', 'data/images/BattleCity.png');
+				}
+				
+				// THE GAME HAS BEEN CREATED
+				function onCreate() {
+					//this.stage.backgroundColor = Phaser.Color.getColor(192, 192, 192);
+					var logo = game.add.sprite(game.world.centerX - 120, game.world.centerY - 144, 'logo');
+					text = game.add.text(game.world.centerX, game.world.centerY , "Start Game", { font: "24px Arial", fill: "white", align: "center" });
+					text.anchor.set(0.5);
+					text.inputEnabled = true;
+					text.events.onInputDown.add(startGame, this);
+
+				}
+				
+				// THE GAME IS GOING TO BE UPDATED
+				function onUpdate() {
+
+	    		};
+
+	    		function startGame () {
+	    			game.add.tween(text).to({y: 0}, 2400, Phaser.Easing.Linear.None, true);
+	    		}
+	    	};
+		</script>
+    </head>
+    <body>
+    </body>
+</html>
