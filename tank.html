@@ -12,6 +12,7 @@
 				// onCreate to be executed once the game is firstly created
 				// onUpdate to be called every time the game us updated
 				var text;
+				var logo;
 				var game = new Phaser.Game(640,480,Phaser.AUTO,"",{preload:onPreload, create:onCreate, update:onUpdate});
 
 				
@@ -23,7 +24,7 @@
 				// THE GAME HAS BEEN CREATED
 				function onCreate() {
 					//this.stage.backgroundColor = Phaser.Color.getColor(192, 192, 192);
-					var logo = game.add.sprite(game.world.centerX - 120, game.world.centerY - 144, 'logo');
+					logo = game.add.sprite(game.world.centerX - 120, game.world.centerY - 144, 'logo');
 					text = game.add.text(game.world.centerX, game.world.centerY , "Start Game", { font: "24px Arial", fill: "white", align: "center" });
 					text.anchor.set(0.5);
 					text.inputEnabled = true;
@@ -37,7 +38,11 @@
 	    		};
 
 	    		function startGame () {
-	    			game.add.tween(text).to({y: 0}, 2400, Phaser.Easing.Linear.None, true);
+	    			game.add.tween(logo).to({y: -164}, 2400, Phaser.Easing.Linear.None, true);
+	    			var t = game.add.tween(text).to({y: -20}, 2400, Phaser.Easing.Linear.None, true);
+	    			t.onComplete.add(function() {
+	    				alert('al');
+	    			});
 	    		}
 	    	};
 		</script>
