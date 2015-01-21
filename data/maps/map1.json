@@ -250,7 +250,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/Downloads\/BattleCity Release\/tile.png",
+         "image":"..\/images\/tile.png",
          "imageheight":32,
          "imagewidth":224,
          "margin":0,
@@ -301,7 +301,7 @@
         }, 
         {
          "firstgid":113,
-         "image":"..\/..\/..\/..\/..\/..\/Downloads\/BattleCity Release\/tile.png",
+         "image":"..\/images\/tile.png",
          "imageheight":32,
          "imagewidth":224,
          "margin":0,
@@ -328,7 +328,7 @@
         }, 
         {
          "firstgid":120,
-         "image":"..\/..\/..\/..\/..\/..\/Downloads\/BattleCity Release\/tile.png",
+         "image":"..\/images\/tile.png",
          "imageheight":32,
          "imagewidth":224,
          "margin":0,
@@ -344,7 +344,7 @@
         }, 
         {
          "firstgid":134,
-         "image":"..\/..\/..\/..\/..\/..\/Downloads\/BattleCity Release\/tile.png",
+         "image":"..\/images\/tile.png",
          "imageheight":32,
          "imagewidth":224,
          "margin":0,

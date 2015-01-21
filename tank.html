@@ -20,11 +20,13 @@
 				// THE GAME IS PRELOADING
 				function onPreload() {
 					game.load.image('logo', 'data/images/BattleCity.png');
+					game.load.tilemap("map1", "data/maps/map1.json", null, Phaser.Tilemap.TILED_JSON);
+					game.load.image("tile", "data/images/tile.png", 32, 32);
 				}
 				
 				// THE GAME HAS BEEN CREATED
 				function onCreate() {
-					//this.stage.backgroundColor = Phaser.Color.getColor(192, 192, 192);
+					
 					logo = game.add.sprite(game.world.centerX - 120, game.world.centerY - 144, 'logo');
 					text = game.add.text(game.world.centerX, game.world.centerY , "Start Game", { font: "24px Arial", fill: "white", align: "center" });
 					text.anchor.set(0.5);
@@ -48,8 +50,17 @@
 
 	    		gameState.onStart = function() {}
 	    		gameState.onStart.prototype = {
+	    			preload : function() {
+    					this.stage.backgroundColor = Phaser.Color.getColor(192, 192, 192);
+	    			},
+
 	    			create : function() {
-	    				alert('c');
+	    				map = game.add.tilemap("map1");
+	    				map.addTilesetImage('tile');
+	    				layer = map.createLayer('bg1');
+					    var scale = game.world.height/ map.heightInPixels;
+					    layer.scale.set(scale);
+					    layer.resizeWorld();
 	    			}
     				
 	    		}
