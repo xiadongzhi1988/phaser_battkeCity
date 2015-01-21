@@ -13,6 +13,7 @@
 				// onUpdate to be called every time the game us updated
 				var text;
 				var logo;
+				var gameState = {};
 				var game = new Phaser.Game(640,480,Phaser.AUTO,"",{preload:onPreload, create:onCreate, update:onUpdate});
 
 				
@@ -41,9 +42,19 @@
 	    			game.add.tween(logo).to({y: -164}, 2400, Phaser.Easing.Linear.None, true);
 	    			var t = game.add.tween(text).to({y: -20}, 2400, Phaser.Easing.Linear.None, true);
 	    			t.onComplete.add(function() {
-	    				alert('al');
+	    				game.state.start('start');
 	    			});
 	    		}
+
+	    		gameState.onStart = function() {}
+	    		gameState.onStart.prototype = {
+	    			create : function() {
+	    				alert('c');
+	    			}
+    				
+	    		}
+
+	    		game.state.add('start', gameState.onStart);
 	    	};
 		</script>
     </head>
