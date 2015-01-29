@@ -22,12 +22,13 @@
 					game.load.image('logo', 'data/images/BattleCity.png');
 					game.load.tilemap("map1", "data/maps/map1.json", null, Phaser.Tilemap.TILED_JSON);
 					game.load.image("tile", "data/images/tile.png", 32, 32);
-					game.load.atlasJSONArray('images', 'data/images/images.png', 'data/images/images.json');
+					//game.load.atlasJSONArray('images', 'data/images/images.png', 'data/images/images.json');
+
 				}
 				
 				// THE GAME HAS BEEN CREATED
 				function onCreate() {
-					
+					game.state.start('start');return false;
 					logo = game.add.sprite(game.world.centerX - 120, game.world.centerY - 144, 'logo');
 					text = game.add.text(game.world.centerX, game.world.centerY , "Start Game", { font: "24px Arial", fill: "white", align: "center" });
 					text.anchor.set(0.5);
@@ -58,10 +59,24 @@
 	    			create : function() {
 	    				map = game.add.tilemap("map1");
 	    				map.addTilesetImage('tile');
-	    				layer = map.createLayer('bg1');
-					    var scale = game.world.height/ map.heightInPixels;
-					    layer.scale.set(scale);
-					    layer.resizeWorld();
+	    				//原始地图中的bg1层
+	    				var layer1 = map.layer;
+	    				//创建新的层，使用远层的大小
+	    				layer = map.createLayer('bg1', layer1.heightInPixels, layer1.heightInPixels);
+	    				layer.position.x = 100;
+	    				layer.fixedToCamera = false;
+	    				alert(layer.x);
+	    				//重新设定宽度和高度，使高度满足对其
+					    //var scale = game.world.height/ layer.height;
+					    //layer.scale.set(scale, scale);
+					    
+					    
+					    
+					    console.log(layer.x);
+	    			},
+
+	    			update : function() {
+	    				layer.position.x = 100;
 	    			}
     				
 	    		}
