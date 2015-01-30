@@ -22,7 +22,7 @@
 					game.load.image('logo', 'data/images/BattleCity.png');
 					game.load.tilemap("map1", "data/maps/map1.json", null, Phaser.Tilemap.TILED_JSON);
 					game.load.image("tile", "data/images/tile.png", 32, 32);
-					//game.load.atlasJSONArray('images', 'data/images/images.png', 'data/images/images.json');
+					game.load.image('tankAll', 'data/images/tankAll.png');
 
 				}
 				
@@ -63,20 +63,17 @@
 	    				var layer1 = map.layer;
 	    				//创建新的层，使用远层的大小
 	    				layer = map.createLayer('bg1', layer1.heightInPixels, layer1.heightInPixels);
-	    				layer.position.x = 100;
+	    				layer.position.x = game.world.width / 6;
 	    				layer.fixedToCamera = false;
-	    				alert(layer.x);
 	    				//重新设定宽度和高度，使高度满足对其
-					    //var scale = game.world.height/ layer.height;
-					    //layer.scale.set(scale, scale);
+					    var scale = game.world.height/ layer.height;
+					    layer.scale.set(scale, scale);
 					    
-					    
-					    
-					    console.log(layer.x);
+					    var ipFild = game.add.tileSprite(9*32, 7*32, 32, 16, 'tankAll');
 	    			},
 
 	    			update : function() {
-	    				layer.position.x = 100;
+	    				
 	    			}
     				
 	    		}
