@@ -13,6 +13,8 @@
 				// onUpdate to be called every time the game us updated
 				var text;
 				var logo;
+				var data = {};
+				data.lives = 3;
 				var gameState = {};
 				var game = new Phaser.Game(640,480,Phaser.AUTO,"",{preload:onPreload, create:onCreate, update:onUpdate});
 
@@ -23,6 +25,8 @@
 					game.load.tilemap("map1", "data/maps/map1.json", null, Phaser.Tilemap.TILED_JSON);
 					game.load.image("tile", "data/images/tile.png", 32, 32);
 					game.load.image('tankAll', 'data/images/tankAll.png');
+					game.load.image('IP', 'data/images/ip.png');
+					game.load.image('misc', 'data/images/Misc.png');
 
 				}
 				
@@ -69,7 +73,21 @@
 					    var scale = game.world.height/ layer.height;
 					    layer.scale.set(scale, scale);
 					    
-					    var ipFild = game.add.tileSprite(9*32, 7*32, 32, 16, 'tankAll');
+					    var ipField = game.add.sprite(30*2, 50*2, 'IP');
+					    //ipField.scale.set(2.0);
+
+					    var ipLifeIcok = game.add.tileSprite(0,0, 32, 32, "tankAll");
+					    ipLifeIcok.scale.set(0.6);    
+    					ipLifeIcok.position.set(50, 60*2);  
+    
+    					var text = data.lives;
+    					var style = { font: "18px Arial", fill: "#000000", align: "center" };
+
+    					var t = game.add.text(75, 60*2,  text, style); 
+
+    					//添加小旗子
+    					var flageIcon = game.add.tileSprite(4*32, 0, -32, 32, 'misc');
+    					//flageIcon.position.set(game.world.width-100, 100*2);
 	    			},
 
 	    			update : function() {
