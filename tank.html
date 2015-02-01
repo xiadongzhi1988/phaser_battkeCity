@@ -67,27 +67,28 @@
 	    				var layer1 = map.layer;
 	    				//创建新的层，使用远层的大小
 	    				layer = map.createLayer('bg1', layer1.heightInPixels, layer1.heightInPixels);
-	    				layer.position.x = game.world.width / 6;
+	    				layer.position.x = game.world.width / 8;
 	    				layer.fixedToCamera = false;
 	    				//重新设定宽度和高度，使高度满足对其
 					    var scale = game.world.height/ layer.height;
 					    layer.scale.set(scale, scale);
 					    
-					    var ipField = game.add.sprite(30*2, 50*2, 'IP');
+					    var ipField = game.add.sprite(20*2, 50*2, 'IP');
 					    //ipField.scale.set(2.0);
 
 					    var ipLifeIcok = game.add.tileSprite(0,0, 32, 32, "tankAll");
 					    ipLifeIcok.scale.set(0.6);    
-    					ipLifeIcok.position.set(50, 60*2);  
+    					ipLifeIcok.position.set(30, 60*2);  
     
     					var text = data.lives;
     					var style = { font: "18px Arial", fill: "#000000", align: "center" };
 
-    					var t = game.add.text(75, 60*2,  text, style); 
+    					var t = game.add.text(55, 60*2,  text, style); 
 
     					//添加小旗子
-    					var flageIcon = game.add.tileSprite(4*32, 0, -32, 32, 'misc');
-    					//flageIcon.position.set(game.world.width-100, 100*2);
+    					var flageIcon = game.add.tileSprite(0, 0, 32, 32, 'misc');
+    					flageIcon.tilePosition.set(16*32, 0);
+    					flageIcon.position.set(game.world.width-50, 100*2);
 	    			},
 
 	    			update : function() {
