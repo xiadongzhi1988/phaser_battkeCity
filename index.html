@@ -1,0 +1,25 @@
+<!doctype html> 
+<html lang="zh"> 
+<head> 
+  <meta charset="UTF-8" />
+  <script type="text/javascript" src="js/phaser.min.js"></script>
+  <script type="text/javascript" src="js/Map.js"></script>
+  <script type="text/javascript" src="js/ready.js"></script>
+  <script type="text/javascript" src="js/start.js"></script>
+  <style>
+    body {
+      margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<div id="game"></div>
+<script type="text/javascript">
+  var game = new Phaser.Game(640, 480, Phaser.CANVAS, "game");
+  game.state.add('ready', GameState.ready);
+  game.state.add('start', GameState.start);
+  game.state.start('ready');
+</script>
+</body>
+</html>
