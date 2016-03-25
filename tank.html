@@ -69,6 +69,7 @@
 	    				layer = map.createLayer('bg1', layer1.heightInPixels, layer1.heightInPixels);
 	    				layer.position.x = game.world.width / 8;
 	    				layer.fixedToCamera = false;
+	    				layer.context.fillStyle = "#0000000"; 
 	    				//重新设定宽度和高度，使高度满足对其
 					    var scale = game.world.height/ layer.height;
 					    layer.scale.set(scale, scale);
