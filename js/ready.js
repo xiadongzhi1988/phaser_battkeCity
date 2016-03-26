@@ -8,6 +8,7 @@ GameState.ready.prototype = {
     game.load.image('p1', 'assets/images/images/p1.png');
     game.load.image('flag', 'assets/images/images/flag.png');
     game.load.image("tile", "assets/images/tile.png");
+    game.load.image("home", "assets/images/images/home.png");
     game.load.tilemap("map1", "assets/maps/map1.json", null, Phaser.Tilemap.TILED_JSON);
   },
 
