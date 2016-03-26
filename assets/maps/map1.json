@@ -23,16 +23,15 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
          "height":52,
          "name":"objects",
          "objects":[
                 {
                  "height":24,
+                 "id":1,
                  "name":"pl1",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -41,11 +40,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":2,
                  "name":"pl2",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -54,11 +51,9 @@
                 }, 
                 {
                  "height":32,
+                 "id":3,
                  "name":"en1",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
@@ -67,11 +62,9 @@
                 }, 
                 {
                  "height":32,
+                 "id":4,
                  "name":"en2",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
@@ -80,11 +73,9 @@
                 }, 
                 {
                  "height":32,
+                 "id":5,
                  "name":"en3",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
@@ -93,11 +84,9 @@
                 }, 
                 {
                  "height":32,
+                 "id":6,
                  "name":"home",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
@@ -106,11 +95,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":7,
                  "name":"t1",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -119,11 +106,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":8,
                  "name":"t2",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -132,11 +117,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":9,
                  "name":"t3",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -145,11 +128,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":10,
                  "name":"t4",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -158,11 +139,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":11,
                  "name":"t5",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -171,11 +150,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":12,
                  "name":"t6",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -184,11 +161,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":13,
                  "name":"t7",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -197,11 +172,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":14,
                  "name":"t8",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -210,11 +183,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":15,
                  "name":"t9",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -223,11 +194,9 @@
                 }, 
                 {
                  "height":24,
+                 "id":16,
                  "name":"t10",
-                 "properties":
-                    {
-
-                    },
+                 "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
@@ -241,25 +210,21 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":17,
  "orientation":"orthogonal",
- "properties":
-    {
-
-    },
+ "renderorder":"right-down",
  "tileheight":8,
  "tilesets":[
         {
+         "columns":28,
          "firstgid":1,
          "image":"..\/images\/tile.png",
          "imageheight":32,
          "imagewidth":224,
          "margin":0,
          "name":"tile",
-         "properties":
-            {
-
-            },
          "spacing":0,
+         "tilecount":112,
          "tileheight":8,
          "tileproperties":
             {
@@ -296,73 +261,42 @@
                  "str":"2"
                 }
             },
-         "tilewidth":8,
-         "transparentcolor":"#000000"
-        }, 
-        {
-         "firstgid":113,
-         "image":"..\/images\/tile.png",
-         "imageheight":32,
-         "imagewidth":224,
-         "margin":0,
-         "name":"tile",
-         "properties":
+         "tilepropertytypes":
             {
-
-            },
-         "spacing":0,
-         "tileheight":32,
-         "tileproperties":
-            {
+             "0":
+                {
+                 "tilewall":"string"
+                },
+             "1":
+                {
+                 "tilewall":"string"
+                },
+             "28":
+                {
+                 "tilewall":"string"
+                },
+             "29":
+                {
+                 "tilewall":"string"
+                },
+             "32":
+                {
+                 "str":"string"
+                },
+             "33":
+                {
+                 "str":"string"
+                },
+             "4":
+                {
+                 "str":"string"
+                },
              "5":
                 {
-                 "home":"1"
-                },
-             "6":
-                {
-                 "home":"2"
+                 "str":"string"
                 }
             },
-         "tilewidth":32,
-         "transparentcolor":"#000000"
-        }, 
-        {
-         "firstgid":120,
-         "image":"..\/images\/tile.png",
-         "imageheight":32,
-         "imagewidth":224,
-         "margin":0,
-         "name":"tile",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tilewidth":32,
-         "transparentcolor":"#000000"
-        }, 
-        {
-         "firstgid":134,
-         "image":"..\/images\/tile.png",
-         "imageheight":32,
-         "imagewidth":224,
-         "margin":0,
-         "name":"tile",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tileproperties":
-            {
-             "2":
-                {
-                 "1":"1"
-                }
-            },
-         "tilewidth":16,
+         "tilewidth":8,
          "transparentcolor":"#000000"
         }],
  "tilewidth":8,

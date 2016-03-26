@@ -18,6 +18,11 @@ GameState.start.prototype = {
 
     this.map = new Map(game, 1, 1, 3);
     this.map.display();
+    
+  },
+
+  update: function() {
+    this.map.update();
   },
 
   iconTank: function() {
