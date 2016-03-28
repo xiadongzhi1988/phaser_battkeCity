@@ -8,6 +8,11 @@ function Tank(game, delege, x, y, kind) {
   this.delege = delege;
 
   this.kAction = 'up';
+  this.bulletTime = 0;
+
+  this.width = 0;
+  this.height = 0;
+  this.hero = null;
 }
 
 Tank.kBorn = 0;
@@ -40,6 +45,14 @@ Tank.prototype.init = function() {
   }
 
   this.born(frameName, speed);
+  this.bulletManage = new Bullet({
+    game: this.game,
+    action: this.kAction,
+    level: this.kind,
+    hero: this.hero,
+    tank: this
+  });
+
 };
 
 Tank.prototype.born = function(frameName, speed) {
@@ -49,6 +62,9 @@ Tank.prototype.born = function(frameName, speed) {
   this.tank.anchor.set(0.5);
   this.tank.position = {x: this.x + this.tank.width / 2, y: this.y + this.tank.height / 2};
   this.speed = speed;
+
+  this.width = this.tank.width;
+  this.height = this.tank.height;
 };
 
 Tank.prototype.doMove = function(newPoint, d) {
@@ -151,4 +167,20 @@ Tank.prototype.checkPoint = function(pointTile) {
 
 Tank.prototype.pointToTile = function(point) {
   return this.delege.convertPixToTile(point);
+};
+
+Tank.prototype.removeTile = function(point) {
+  return this.delege.removeTile(point);
+};
+
+Tank.prototype.fire = function() {
+  this.bulletManage.fire();
+};
+
+Tank.prototype.update = function() {
+  this.bulletManage.update();
+};
+
+Tank.prototype.setHeroSprite = function(sprite) {
+  this.hero = sprite;
 }

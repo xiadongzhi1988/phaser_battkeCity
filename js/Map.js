@@ -35,24 +35,22 @@ Map.prototype.display = function() {
   this.objects = this.map.objects.objects;
   var homeObject = this.findNameFromObjects('home');
   var homeSprite = this.game.add.sprite(this.leftMargin + homeObject.x * this.aScale, homeObject.y * this.aScale, 'home');
+  game.physics.enable(homeSprite, Phaser.Physics.ARCADE);
 
   var playTankPosition = this.findNameFromObjects('pl1');
   this.tank = new Tank(game, this, playTankPosition.x* this.aScale + this.leftMargin, playTankPosition.y * this.aScale, 0);
+  this.tank.setHeroSprite(homeSprite);
   this.tank.init();
 
+  //敌人
+  this.initEnemy();
   this.cursors = game.input.keyboard.createCursorKeys();
-
-  // var testData = this.map.layers[0].data;
-  // for(var i = 0; i < testData.length; i++) {
-  //   for(var j = 0; j < testData[i].length; j++) 
-  //   if (testData[i][j].index !== -1) {
-  //     console.log(i ,j ,testData[i][j])
-  //   }
-  // }
+  this.fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 };
 
 Map.prototype.update = function() {
+  this.tank.update();
   if (this.cursors.left.isDown) {
     this.tank.moveLeft();
   } else if (this.cursors.up.isDown) {
@@ -61,6 +59,10 @@ Map.prototype.update = function() {
     this.tank.moveRight();
   } else if (this.cursors.down.isDown) {
     this.tank.moveDown();
+  }
+
+  if (this.fireButton.isDown) {
+    this.tank.fire();
   }
 };
 
@@ -75,4 +77,16 @@ Map.prototype.findNameFromObjects = function(name) {
 
 Map.prototype.convertPixToTile = function (point) {
   return this.map.getTile(this.layer.getTileX((point.x - this.leftMargin)/ this.aScale), this.layer.getTileY(point.y / this.aScale), 0);
+};
+
+Map.prototype.removeTile = function(point) {
+  return this.map.removeTile(point.x, point.y, this.layer);
+};
+
+Map.prototype.initEnemy = function() {
+  this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.bornEnemy, this);
+};
+
+Map.prototype.bornEnemy = function() {
+  
 }
