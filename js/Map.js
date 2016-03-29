@@ -1,8 +1,9 @@
-function Map(game, level, tankType, life) {
+function Map(game, level, tankType, life, manage) {
   this.game = game;
   this.level = level;
   this.tankType = tankType;
   this.life = life;
+  this.manage = manage;
 
   this.worldWidth = this.game.world.width;
   this.worldHeight = this.game.world.height;
@@ -84,9 +85,57 @@ Map.prototype.removeTile = function(point) {
 };
 
 Map.prototype.initEnemy = function() {
-  this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.bornEnemy, this);
+  this.enemys = game.add.group();
+  this.enemys.enableBody = true;
+  this.enemys.physicsBodyType = Phaser.Physics.ARCADE;
+  this.bornNum = 0;
+  this.enemyIndex = 0;
+  this.tankKinds = enemyData.level1;
+
+  this.enemyLoop = this.game.time.events.loop(Phaser.Timer.SECOND * 2, this.bornEnemy, this);
 };
 
 Map.prototype.bornEnemy = function() {
+  if (this.enemyIndex > this.tankKinds.length - 1) {
+    this.game.time.events.remove(this.enemyLoop);
+    return ;
+  }
+
+  if (this.enemys.total > 5) {
+    return ;
+  }
   
+  var bornPoint;
+  var enemyKind = this.tankKinds[this.enemyIndex];
+  var frameName;
+  switch(enemyKind) {
+    case 1: 
+      frameName = 'en1';
+      break;
+    case 2:
+      frameName = 'en2';
+      break;
+    case 3:
+      break;
+  }
+
+  if (this.bornNum >= 3) {
+    this.bornNum = 0;
+  }
+
+  if (this.bornNum === 0) {
+    bornPoint = this.findNameFromObjects('en1');
+  } else if (this.bornNum === 1) {
+    bornPoint = this.findNameFromObjects('en2');
+  } else {
+    bornPoint = this.findNameFromObjects('en3');
+  }
+
+  var enemySprite = this.game.add.sprite(this.leftMargin + bornPoint.x * this.aScale, bornPoint.y * this.aScale, frameName);
+  this.enemys.addChild(enemySprite);
+
+  this.manage.removeEnemyIconIndex(this.enemyIndex);
+
+  this.enemyIndex ++;
+  this.bornNum++;
 }

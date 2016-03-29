@@ -3,7 +3,7 @@ GameState.start.prototype = {
   create: function() {
     this.worldWidth = game.world.width;
     this.worldHeight = game.world.height;
-
+    this.enemyIcons = [];
     game.stage.backgroundColor = Phaser.Color.getColor(192, 192, 192);
     this.iconTank();
 
@@ -16,7 +16,7 @@ GameState.start.prototype = {
     game.add.sprite(this.worldWidth - 50, 200, 'flag');
     this.displayLevel(1);
 
-    this.map = new Map(game, 1, 1, 3);
+    this.map = new Map(game, 1, 1, 3, this);
     this.map.display();
     
   },
@@ -35,6 +35,8 @@ GameState.start.prototype = {
       height += 15;
       enemy1 = game.add.sprite(this.worldWidth - width, height, 'enemy');
       enemy2 = game.add.sprite(this.worldWidth - width + 18, height, 'enemy');
+      this.enemyIcons.push(enemy1)
+      this.enemyIcons.push(enemy2)
     }
     
   },
@@ -45,5 +47,11 @@ GameState.start.prototype = {
 
   displayLevel: function(levelNumber) {
     game.add.text(this.worldWidth - 50, 230, levelNumber, { font: "20px Courier-Bold", fill: "#000000" });
+  },
+
+  removeEnemyIconIndex: function(index) {
+    if (this.enemyIcons[index]) {
+      this.enemyIcons[index].kill();
+    }
   }
 };

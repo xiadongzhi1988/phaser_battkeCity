@@ -13,6 +13,15 @@ GameState.ready.prototype = {
     game.load.image("p1_b", "assets/images/images/p1-b.png");
     game.load.image("p1_c", "assets/images/images/p1-c.png");
     game.load.image("bullet", "assets/images/images/bullet.png");
+    game.load.image("en1", "assets/images/images/en1.png");
+    game.load.image("en11", "assets/images/images/en1r.png");
+    game.load.image("en2", "assets/images/images/en2.png");
+    game.load.image("en22", "assets/images/images/en2r.png");
+    game.load.image("en3", "assets/images/images/en3.png");
+    game.load.image("en4", "assets/images/images/en4.png");
+    game.load.image("en5", "assets/images/images/en5.png");
+    game.load.image("en6", "assets/images/images/en6.png");
+    game.load.image("en7", "assets/images/images/en7.png");
     game.load.tilemap("map1", "assets/maps/map1.json", null, Phaser.Tilemap.TILED_JSON);
   },
 
