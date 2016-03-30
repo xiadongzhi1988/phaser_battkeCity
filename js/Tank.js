@@ -13,6 +13,7 @@ function Tank(game, delege, x, y, kind) {
   this.width = 0;
   this.height = 0;
   this.hero = null;
+  this.enemys = [];
 }
 
 Tank.kBorn = 0;
@@ -50,7 +51,8 @@ Tank.prototype.init = function() {
     action: this.kAction,
     level: this.kind,
     hero: this.hero,
-    tank: this
+    tank: this,
+    come: 'player'
   });
 
 };
@@ -58,111 +60,39 @@ Tank.prototype.init = function() {
 Tank.prototype.born = function(frameName, speed) {
   //播放出生动画
   //保护层动画
-  this.tank = this.game.add.sprite(this.x, this.y, frameName);
-  this.tank.anchor.set(0.5);
-  this.tank.position = {x: this.x + this.tank.width / 2, y: this.y + this.tank.height / 2};
-  this.speed = speed;
+  this.tank = new BaseTank({
+    game: this.game,
+    x: this.x,
+    y: this.y,
+    frameName: frameName,
+    speed: speed,
+    kAction: this.kAction,
+    delege: this.delege,
+    life: 1
+  }); //this.game.add.sprite(this.x, this.y, frameName);
 
-  this.width = this.tank.width;
-  this.height = this.tank.height;
+
 };
 
-Tank.prototype.doMove = function(newPoint, d) {
-  var check = {};
-  var check1 = {};
-  var check2 = {};
-  check.x = newPoint.x;
-  check.y = newPoint.y;
-  check1.x = newPoint.x;
-  check1.y = newPoint.y;
-  check2.x = newPoint.x;
-  check2.y = newPoint.y;
-
-  if (d == 'left') {
-    check.x = newPoint.x - this.tank.width / 2;
-    check1.x = check.x;
-    check2.x = check.x;
-
-    check1.y = newPoint.y + this.tank.height / 2 - 2;
-    check2.y = newPoint.y - this.tank.height / 2 + 2;
-
-  } else if (d == 'up') {
-
-    check.y = newPoint.y - this.tank.height / 2;
-    check1.y = check.y;
-    check2.y = check.y;
-
-    check1.x = newPoint.x + this.tank.width / 2 - 2;
-    check2.x = newPoint.x - this.tank.width / 2 + 2;
-  } else if (d == 'right') {
-    check.x = newPoint.x + this.tank.width /2;
-    check1.x = check.x;
-    check2.x = check.x;
-
-    check1.y = newPoint.y + this.tank.height / 2 - 2;
-    check2.y = newPoint.y - this.tank.height / 2 + 2;
-
-  } else {
-    check.y = newPoint.y + this.tank.height / 2;
-    check1.y = check.y;
-    check2.y = check.y;
-
-    check1.x = newPoint.x + this.tank.width / 2 - 2;
-    check2.x = newPoint.x - this.tank.width / 2 + 2;
-  }
-
-  //check边界
-  if (check.x >= this.delege.layer.x + this.delege.layer.width ||
-      check.x <= this.delege.layer.x ||
-      check.y <= 0 || 
-      check.y >= this.delege.layer.y + this.delege.layer.height
-    ) {
-    return ;
-  }
-  var pointTile = this.pointToTile(check);
-  var pointTile1 = this.pointToTile(check1);
-  var pointTile2 = this.pointToTile(check2);
-  if (this.checkPoint(pointTile) && this.checkPoint(pointTile1) && this.checkPoint(pointTile2)) {
-    this.tank.position = newPoint;
-  }
-};
 
 Tank.prototype.moveLeft = function() {
   this.kAction = 'left';
-  this.tank.angle = -90;
-
-  var newPoint = {x: this.tank.x - this.speed, y: this.tank.y};
-  this.doMove(newPoint, 'left');
-
+  this.tank.moveLeft();
 };
 
 Tank.prototype.moveUp = function() {
   this.kAction = 'up';
-  this.tank.angle = 0;
-
-  var newPoint = {x: this.tank.x, y: this.tank.y - this.speed};
-  this.doMove(newPoint, 'up');
+  this.tank.moveUp();
 };
 
 Tank.prototype.moveRight = function() {
   this.kAction = 'right';
-  this.tank.angle = 90;
-  var newPoint = {x: this.tank.x + this.speed, y: this.tank.y };
-  this.doMove(newPoint, 'right');
+  this.tank.moveRight();
 };
 
 Tank.prototype.moveDown = function() {
   this.kAction = 'down';
-  this.tank.angle = 180;
-  var newPoint = {x: this.tank.x, y: this.tank.y + this.speed};
-  this.doMove(newPoint, 'down');
-};
-
-Tank.prototype.checkPoint = function(pointTile) {
-  if (pointTile && pointTile.index > 0) {
-    return false;
-  }
-  return true;
+  this.tank.moveDown();
 };
 
 Tank.prototype.pointToTile = function(point) {
@@ -183,4 +113,8 @@ Tank.prototype.update = function() {
 
 Tank.prototype.setHeroSprite = function(sprite) {
   this.hero = sprite;
+};
+
+Tank.prototype.addEnemy = function(enemy) {
+  this.enemys.push(enemy);
 }

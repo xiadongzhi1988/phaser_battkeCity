@@ -52,6 +52,10 @@ Map.prototype.display = function() {
 
 Map.prototype.update = function() {
   this.tank.update();
+
+  for(var i= 0; i < this.enemys.length; i++) {
+    this.enemys[i].update();
+  }
   if (this.cursors.left.isDown) {
     this.tank.moveLeft();
   } else if (this.cursors.up.isDown) {
@@ -85,9 +89,8 @@ Map.prototype.removeTile = function(point) {
 };
 
 Map.prototype.initEnemy = function() {
-  this.enemys = game.add.group();
-  this.enemys.enableBody = true;
-  this.enemys.physicsBodyType = Phaser.Physics.ARCADE;
+  this.enemys = [];
+
   this.bornNum = 0;
   this.enemyIndex = 0;
   this.tankKinds = enemyData.level1;
@@ -101,10 +104,10 @@ Map.prototype.bornEnemy = function() {
     return ;
   }
 
-  if (this.enemys.total > 5) {
+  if (this.enemys.length > 5) {
     return ;
   }
-  
+
   var bornPoint;
   var enemyKind = this.tankKinds[this.enemyIndex];
   var frameName;
@@ -131,8 +134,19 @@ Map.prototype.bornEnemy = function() {
     bornPoint = this.findNameFromObjects('en3');
   }
 
-  var enemySprite = this.game.add.sprite(this.leftMargin + bornPoint.x * this.aScale, bornPoint.y * this.aScale, frameName);
-  this.enemys.addChild(enemySprite);
+  var enemySprite = new EnemySprite({
+    game: this.game,
+    x: this.leftMargin + bornPoint.x * this.aScale,
+    y: bornPoint.y * this.aScale,
+    kind: 1,
+    delege: this
+  });
+
+  this.enemys.push(enemySprite);
+  this.tank.bulletManage.addEnemy(enemySprite);
+
+  //添加敌人 子弹碰撞
+  this.tank.addEnemy(enemySprite);
 
   this.manage.removeEnemyIconIndex(this.enemyIndex);
 
