@@ -44,7 +44,8 @@ EnemySprite.prototype.init = function() {
     speed: this.speed,
     kAction: this.kAction,
     delege: this.delege,
-    life: this.life
+    life: this.life,
+    main: this
   });
 
   this.tank.sprite.angle = 180;
@@ -109,3 +110,7 @@ EnemySprite.prototype.pointToTile = function(point) {
 EnemySprite.prototype.removeTile = function(point) {
   return this.delege.removeTile(point);
 };
+
+EnemySprite.prototype.destroy = function() {
+  this.bulletManage.destroy();
+}

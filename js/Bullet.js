@@ -119,15 +119,15 @@ Bullet.prototype.checkWall = function(bullet) {
     point2.x = bullet.x + 10;
     point2.y = bullet.y;
 
-    point2.x = bullet.x - 10;
-    point2.y = bullet.y;
+    point3.x = bullet.x - 10;
+    point3.y = bullet.y;
   } else if (bullet.action === 'left' || bullet.action === 'right') {
     
-    point2.x = bullet.x + 10;
-    point2.y = bullet.y;
+    point2.x = bullet.x;
+    point2.y = bullet.y  + 10;
 
-    point2.x = bullet.x - 10;
-    point2.y = bullet.y;
+    point3.x = bullet.x;
+    point3.y = bullet.y - 10;
 
   } 
   var tile = this.tank.pointToTile({x: point1.x, y: point1.y});
@@ -176,4 +176,8 @@ Bullet.prototype.hiteEnemy = function(enemy, bullet) {
     bullet.kill();
     enemy.heart();
   }
+};
+
+Bullet.prototype.destroy = function() {
+  this.bullets.destroy();
 }

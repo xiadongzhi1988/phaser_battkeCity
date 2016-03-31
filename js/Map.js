@@ -9,35 +9,42 @@ function Map(game, level, tankType, life, manage) {
   this.worldHeight = this.game.world.height;
 
   this.map = null;
-  this.leftMargin = 0;
+  this.leftMargin = this.worldWidth / 8;
   this.objects = [];
   this.aScale = 1;
   this.tank = null;
 }
 
-Map.prototype.display = function() {           
+Map.prototype.display = function() {   
+  //添加地图和图片        
   this.map = this.game.add.tilemap("map1");
   this.map.addTilesetImage('tile');
+
   var layer1 = this.map.layer;
+  //高度匹配，调整宽度
   this.aScale = this.game.world.height / layer1.heightInPixels;
+
+  //添加一个背景一样大小的黑色背景
   var bmd = game.add.bitmapData(layer1.heightInPixels * this.aScale, layer1.heightInPixels * this.aScale);
   bmd.context.fillStyle = '#000000';
   bmd.context.fillRect(0, 0, layer1.heightInPixels * this.aScale, layer1.heightInPixels * this.aScale);
   bmd.addToWorld(game.world.centerX, game.world.centerY, 0.5, 0.5);
   
 
-  // //创建新的层，使用远层的大小
+  //创建新的层，使用远层的大小
   this.layer = this.map.createLayer('bg1', layer1.heightInPixels, layer1.heightInPixels);
-  this.layer.position.x = this.worldWidth / 8;
+  this.layer.position.x = this.leftMargin;
   this.layer.scale = {x: this.aScale, y: this.aScale};
   this.layer.fixedToCamera = false;
 
-  this.leftMargin = this.worldWidth / 8;
+
   this.objects = this.map.objects.objects;
+  //基地位置
   var homeObject = this.findNameFromObjects('home');
   var homeSprite = this.game.add.sprite(this.leftMargin + homeObject.x * this.aScale, homeObject.y * this.aScale, 'home');
   game.physics.enable(homeSprite, Phaser.Physics.ARCADE);
 
+  //玩家一的位置
   var playTankPosition = this.findNameFromObjects('pl1');
   this.tank = new Tank(game, this, playTankPosition.x* this.aScale + this.leftMargin, playTankPosition.y * this.aScale, 0);
   this.tank.setHeroSprite(homeSprite);
@@ -45,9 +52,6 @@ Map.prototype.display = function() {
 
   //敌人
   this.initEnemy();
-  this.cursors = game.input.keyboard.createCursorKeys();
-  this.fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
 };
 
 Map.prototype.update = function() {
@@ -56,19 +60,7 @@ Map.prototype.update = function() {
   for(var i= 0; i < this.enemys.length; i++) {
     this.enemys[i].update();
   }
-  if (this.cursors.left.isDown) {
-    this.tank.moveLeft();
-  } else if (this.cursors.up.isDown) {
-    this.tank.moveUp();
-  } else if (this.cursors.right.isDown) {
-    this.tank.moveRight();
-  } else if (this.cursors.down.isDown) {
-    this.tank.moveDown();
-  }
 
-  if (this.fireButton.isDown) {
-    this.tank.fire();
-  }
 };
 
 Map.prototype.findNameFromObjects = function(name) {

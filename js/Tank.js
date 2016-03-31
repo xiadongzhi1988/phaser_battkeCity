@@ -55,6 +55,8 @@ Tank.prototype.init = function() {
     come: 'player'
   });
 
+  this.cursors = this.game.input.keyboard.createCursorKeys();
+  this.fireButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 };
 
 Tank.prototype.born = function(frameName, speed) {
@@ -68,10 +70,9 @@ Tank.prototype.born = function(frameName, speed) {
     speed: speed,
     kAction: this.kAction,
     delege: this.delege,
-    life: 1
-  }); //this.game.add.sprite(this.x, this.y, frameName);
-
-
+    life: 1,
+    main: this
+  });
 };
 
 
@@ -109,6 +110,21 @@ Tank.prototype.fire = function() {
 
 Tank.prototype.update = function() {
   this.bulletManage.update();
+
+  if (this.cursors.left.isDown) {
+    this.moveLeft();
+  } else if (this.cursors.up.isDown) {
+    this.moveUp();
+  } else if (this.cursors.right.isDown) {
+    this.moveRight();
+  } else if (this.cursors.down.isDown) {
+    this.moveDown();
+  }
+
+  if (this.fireButton.isDown) {
+    this.fire();
+  }
+
 };
 
 Tank.prototype.setHeroSprite = function(sprite) {

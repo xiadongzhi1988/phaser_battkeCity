@@ -7,6 +7,7 @@ function BaseTank (opts) {
   this.kAction = opts.kAction;
   this.delege = opts.delege;
   this.life = opts.life;
+  this.main = opts.main;
 
   this.init();
 }
@@ -132,5 +133,6 @@ BaseTank.prototype.heart = function() {
     this.life --;
   } else {
     this.sprite.kill();
+    this.main.destroy();
   }
 }
