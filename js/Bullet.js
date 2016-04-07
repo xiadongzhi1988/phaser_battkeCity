@@ -91,6 +91,7 @@ Bullet.prototype.update = function() {
     game.physics.arcade.overlap(this.hero, bullet, this.killSelf, null, this);
     for(var j = 0;j < this.enemys.length ; j++) {
       game.physics.arcade.overlap(this.enemys[j], bullet, this.hiteEnemy, null, this);
+      game.physics.arcade.overlap(this.enemys[j].bullets, bullet, this.hitBulletWithBullet, null, this);
     }
     
   }
@@ -175,9 +176,17 @@ Bullet.prototype.hiteEnemy = function(enemy, bullet) {
   if (this.come === 'player') {
     bullet.kill();
     enemy.heart();
+  } else if (this.come === 'enemy') {
+    bullet.kill();
+    enemy.heart();
   }
 };
 
 Bullet.prototype.destroy = function() {
   this.bullets.destroy();
+};
+
+Bullet.prototype.hitBulletWithBullet = function(bullet1, bullet2) {
+  bullet2.kill();
+  bullet1.kill();
 }

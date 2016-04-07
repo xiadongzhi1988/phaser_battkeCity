@@ -131,11 +131,13 @@ Map.prototype.bornEnemy = function() {
     x: this.leftMargin + bornPoint.x * this.aScale,
     y: bornPoint.y * this.aScale,
     kind: 1,
+    enemyIndex: this.enemyIndex,
     delege: this
   });
 
   this.enemys.push(enemySprite);
   this.tank.bulletManage.addEnemy(enemySprite);
+  enemySprite.bulletManage.addEnemy(this.tank);
 
   //添加敌人 子弹碰撞
   this.tank.addEnemy(enemySprite);
@@ -144,4 +146,15 @@ Map.prototype.bornEnemy = function() {
 
   this.enemyIndex ++;
   this.bornNum++;
+};
+
+Map.prototype.removeEnemy = function(index) {
+  var arr = [];
+  for(var i = 0; i < this.enemys.length; i ++) {
+    if (i === index) {
+      continue;
+    }
+    arr.push(this.enemys[i]);
+  }
+  this.enemys = arr;
 }

@@ -4,12 +4,14 @@ function EnemySprite(opts) {
   this.x = opts.x;
   this.y = opts.y;
   this.delege = opts.delege;
+  this.enemyIndex = opts.enemyIndex;
 
   this.life = 0;
   this.frameName = '';
   this.speed = 100;
   this.kAction = 'down';
   this.tank;
+  this.enemys = [];
 
   this.init();
 }
@@ -36,6 +38,15 @@ EnemySprite.prototype.init = function() {
     
   }
 
+  this.bulletManage = new Bullet({
+    game: this.game,
+    action: this.kAction,
+    level: this.kind,
+    hero: this.hero,
+    tank: this,
+    come: 'enemy'
+  });
+
   this.tank = new BaseTank({
     game: this.game,
     x: this.x,
@@ -45,19 +56,13 @@ EnemySprite.prototype.init = function() {
     kAction: this.kAction,
     delege: this.delege,
     life: this.life,
-    main: this
+    main: this,
+    bullets: this.bulletManage.bullets
   });
 
   this.tank.sprite.angle = 180;
 
-  this.bulletManage = new Bullet({
-    game: this.game,
-    action: this.kAction,
-    level: this.kind,
-    hero: this.hero,
-    tank: this,
-    come: 'enemy'
-  });
+
 
   this.game.time.events.add(Phaser.Timer.SECOND, this.initMove, this);
 }
@@ -113,4 +118,9 @@ EnemySprite.prototype.removeTile = function(point) {
 
 EnemySprite.prototype.destroy = function() {
   this.bulletManage.destroy();
+  this.delege.removeEnemy(this.enemyIndex);
+}
+
+EnemySprite.prototype.addEnemy = function(enemy) {
+  this.enemys.push(enemy);
 }

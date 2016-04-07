@@ -8,6 +8,7 @@ function BaseTank (opts) {
   this.delege = opts.delege;
   this.life = opts.life;
   this.main = opts.main;
+  this.bullets = opts.bullets;
 
   this.init();
 }
@@ -18,6 +19,7 @@ BaseTank.prototype.init = function() {
   this.sprite.anchor.set(0.5);
   this.sprite.position = {x: this.x + this.sprite.width / 2, y: this.y + this.sprite.height / 2};
   this.sprite.heart = this.heart.bind(this);
+  this.sprite.bullets = this.bullets;
 
   this.width = this.sprite.width;
   this.height = this.sprite.height;

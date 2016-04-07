@@ -134,3 +134,7 @@ Tank.prototype.setHeroSprite = function(sprite) {
 Tank.prototype.addEnemy = function(enemy) {
   this.enemys.push(enemy);
 }
+
+Tank.prototype.destroy = function() {
+  this.bulletManage.destroy();
+}
